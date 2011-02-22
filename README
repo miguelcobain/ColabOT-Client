@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Operations:
 	- add/2
 		Arguments:
@@ -28,3 +29,6 @@ Example operation - add(2,asdasd)
     }
 }
 --
+=======
+TEST
+>>>>>>> 354632602ce9448358c972aca9eee000f4a65f39
