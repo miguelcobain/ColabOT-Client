@@ -19,6 +19,7 @@ Example operation - add(2,asdasd)
 
 ---
 {
+<<<<<<< HEAD
     "msg": [
         {
             "operation": [
@@ -46,3 +47,14 @@ Example operation - add(2,asdasd)
         }
     ]
 }
+=======
+    "operation":{
+        "type":"add",
+        "arg":[
+            2,
+            "asdasd"
+        ]
+    }
+}
+---
+>>>>>>> 28f4934b6b6d37df7c8b452a7a771f90494b9926
