@@ -1,6 +1,52 @@
+// Function that binds the event
+
 var text1="";
 var text2="";
 
+var localType;
+var isTyping=false;
+
+var dmp = new diff_match_patch();
+
+function detector(ev)  {
+	if(!ev.metaKey) {
+		typeWatch(ev);
+	}
+	
+	//don't delete the beyond p
+	if(ev.keyCode == 8 || ev.keyCode == 46){
+		var editing_lines = $("#editable").children("div").children("p");
+		if(editing_lines.length == 1 && $(editing_lines[0]).html() == ""){
+			$(editing_lines[0]).html("&nbsp;");
+			alert('asd');
+  			return false;
+			}
+		}
+}
+
+function typeWatch(e) {
+	if(!isTyping){
+		isTyping=true;
+		started(e);
+	}
+
+	if (localType) {
+		$("#status").html("Typing!");
+		clearTimeout(localType);
+		
+		
+	}
+
+	localType = setTimeout(function() {
+		$("#status").html(" ");
+		isTyping=false;
+		finished(e);
+	}, 600);
+}
+
+
+
+// Event fired when the user starts typing
 function started(ev) {
 	$("#status2").html("Started! Saved 'text1'.");
 	//alert('text1');
@@ -8,6 +54,7 @@ function started(ev) {
 
 }
 
+// Event fired when the user stops typing
 function finished(ev) {
 	$("#status").html("Finished!");
 	
@@ -53,64 +100,7 @@ function finished(ev) {
 	
 }
 
-var localType;
-var isTyping=false;
-function typeWatch(e) {
-	if(!isTyping){
-		isTyping=true;
-		started(e);
-	}
 
-	if (localType) {
-		$("#status").html("Typing!");
-		clearTimeout(localType);
-		
-		
-	}
 
-	localType = setTimeout(function() {
-		$("#status").html(" ");
-		isTyping=false;
-		finished(e);
-	}, 600);
-}
 
-var dmp = new diff_match_patch();
-
-$(document).ready(function() {
-
-	/*$("#editable").bind("keydown", function(ev)  {
-		switch(ev.which){
-			case 13:
-			  //alert('You pressed enter.');
-			  //ev.preventDefault();
-			  //$("#editable").append('</p><p>');
-			  break;
-			case 8:
-			  //alert('You pressed backspace.');
-			  break;
-			case 46:
-			  alert('You pressed delete.');
-			  break;
-			default:
-		}
-	});*/
-
-	$("#editable").bind("keydown", function(ev)  {
-		if(!ev.metaKey) {
-			typeWatch(ev);
-		}
-		
-		//don't delete the beyond p
-		if(ev.keyCode == 8 || ev.keyCode == 46){
-			var editing_lines = $("#editable").children("div").children("p");
-			if(editing_lines.length == 1 && $(editing_lines[0]).html() == ""){
-				$(editing_lines[0]).html("&nbsp;");
-				alert('asd');
-	  			return false;
-				}
-			}
-	});
-
-});
 
