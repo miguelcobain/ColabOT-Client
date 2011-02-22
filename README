@@ -1,0 +1,30 @@
+Operations:
+	- add/2
+		Arguments:
+			index - start insertion position
+			string - string to insert
+	- del/2
+		Arguments:
+			index - start deletion position
+			lenght - number of characters to delete
+	- rep/3
+		Arguments:
+			index - start replacement position
+			lenght - number of characters to delete
+			string - string to insert after replacement position
+			
+			
+The messages are sent using JSON.
+Example operation - add(2,asdasd)
+
+---
+{
+    operation:{
+        type:'add',
+        arg:[
+            2,
+            'asdasd'
+        ]
+    }
+}
+--
