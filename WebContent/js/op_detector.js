@@ -70,15 +70,25 @@ function finished(ev) {
   var d = dmp.diff_main(text1, text2);
   
   $("#status2").html("");
+	var ops = new Array();
+
   var counter=0;
   jQuery.each(d, function(i, val) {
   		if(val[0]==0) counter+=val[1].length;
   		if(val[0]==1){
       		$("#status2").append("add(" + counter + ',' +val[1] + ")<br/>");
+
+			var op = new OP("add",[counter,val[1]]);
+			ops.push(op);
+			
       		counter+=val[1].length;
       	}
       	if(val[0]==-1){
       		$("#status2").append("delete(" +counter + ','  + val[1] + ")<br/>");
+
+			var op = new OP("del",[counter,val[1].length]);
+			ops.push(op);
+
       		counter+=val[1].length;
       	}
     
@@ -87,6 +97,9 @@ function finished(ev) {
   
   var ms_end = (new Date()).getTime();
 	$("#status2").append('<br/>Tempo: '+(ms_end - ms_start) / 1000 + 's');
+	
+	generate(ops);
+	
 	/*
   if (document.getElementById('semantic').checked) {
     dmp.diff_cleanupSemantic(d);

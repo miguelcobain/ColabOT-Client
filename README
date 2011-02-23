@@ -15,11 +15,10 @@ Operations:
 			
 			
 The messages are sent using JSON.
-Example operation - add(2,asdasd)
+Example operation - add(2,asdasd) on state 11,2 :
 
 ---
 {
-<<<<<<< HEAD
     "msg": [
         {
             "operation": [
@@ -40,14 +39,13 @@ Example operation - add(2,asdasd)
             ]
         },
         {
-            "status": [
+            "state": [
                 11,
                 2
             ]
         }
     ]
 }
-=======
     "operation":{
         "type":"add",
         "arg":[
@@ -57,4 +55,3 @@ Example operation - add(2,asdasd)
     }
 }
 ---
->>>>>>> 28f4934b6b6d37df7c8b452a7a771f90494b9926

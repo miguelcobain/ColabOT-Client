@@ -2,6 +2,7 @@ function WebS(_url){
 	this.url=_url;
 	this.socket=null;
 	this.connect=_connect;
+	this.sendOP=_sendOP;
 	this.close=_close;
 	//this.toString=_toString;
 }
@@ -14,12 +15,13 @@ function _connect(){
 			// Web Socket is connected. You can send data by send() method
 		};
 		this.socket.onmessage = function (evt) {
-			//var received_msg = evt.data;
+			var received_msg = evt.data;
+			receive(received_msg);
 		};
 		this.socket.onclose = function() {
 			// websocket is closed.
 		};
-	    alert("WebSockets supported here!rnrnBrowser: " + navigator.appName + " " + navigator.appVersion + "rnrntest by jimbergman.net (based on Google sample code)");
+	    //alert("WebSockets supported here!rnrnBrowser: " + navigator.appName + " " + navigator.appVersion + "rnrntest by jimbergman.net (based on Google sample code)");
 	}
 	else{
 		// the browser doesn't support WebSockets
@@ -31,12 +33,19 @@ function _close(){
 	this.socket.disconnect();
 }
 
-function _sendOP(op){
-	this.socket.postMessage(JSON.stringify({operation: [obj,obj]}));
+function _sendOP(ops, myMsgs, otherMsgs){
+
+	var state= new Array()
+	state[0]=myMsgs;
+	state[1]=otherMsgs;
+
+
+	//alert(JSON.stringify({msg: [{"operation": ops}, {"state": state}]}));
+	this.socket.send(JSON.stringify({msg: [{"operation": ops}, {"state": state}]}));
 }
 
 function _toString(){
-	return "hahahaha";
+	return "";
 }
 
 
@@ -47,18 +56,3 @@ function OP(type,args){
 	this._type=type;
 	this._args=args;
 }
-var obj = new OP("add",[1,"asdf"]);
-
-var WS = new WebS("ws://localhost");
-//WS.connect();
-//WS.sendOP(obj);
-var ops = new Array();
-ops[0]=obj;
-ops[1]=obj;
-
-var state= new Array()
-state[0]=11;
-state[1]=2;
-
-
-alert(JSON.stringify({msg: [{operation: ops}, {status: state}]}));
