@@ -76,17 +76,11 @@ function _toString(){
 
 function logSent(op){
 	$("#sent").append("<p>"+op.toString()+"</p>");
-<<<<<<< HEAD
 	$("#sent").attr({ scrollTop: $("#sent").attr("scrollHeight") });
-=======
->>>>>>> 144265feac875ed78ad83db7677e4cbcfdd57d2e
 }
 
 function logReceived(op){
 	$("#received").append("<p>"+op.toString()+"</p>");
-<<<<<<< HEAD
 	$("#received").attr({ scrollTop: $("#received").attr("scrollHeight") });
-=======
->>>>>>> 144265feac875ed78ad83db7677e4cbcfdd57d2e
 }
 
