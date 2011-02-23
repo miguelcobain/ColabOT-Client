@@ -9,19 +9,11 @@ var isTyping=false;
 var dmp = new diff_match_patch();
 
 function detector(ev)  {
-	if(!ev.metaKey) {
+	if(!ev.metaKey && (ev.keyCode < 37 || ev.keyCode > 40)) {
 		typeWatch(ev);
 	}
 	
-	//don't delete the beyond p
-	if(ev.keyCode == 8 || ev.keyCode == 46){
-		var editing_lines = $("#editable").children("div").children("p");
-		if(editing_lines.length == 1 && $(editing_lines[0]).html() == ""){
-			$(editing_lines[0]).html("&nbsp;");
-			alert('asd');
-  			return false;
-			}
-		}
+
 }
 
 function typeWatch(e) {
@@ -31,14 +23,12 @@ function typeWatch(e) {
 	}
 
 	if (localType) {
-		$("#status").html("Typing!");
 		clearTimeout(localType);
 		
 		
 	}
 
 	localType = setTimeout(function() {
-		$("#status").html(" ");
 		isTyping=false;
 		finished(e);
 	}, 600);
@@ -48,17 +38,23 @@ function typeWatch(e) {
 
 // Event fired when the user starts typing
 function started(ev) {
-	$("#status2").html("Started! Saved 'text1'.");
+	$("#editable").css("border-color", "#ff8080");
 	//alert('text1');
-	text1=$("#editable").html().replace(/<div>/g, "\n").replace(/<\/div>|<br>/g, "");
+	
+	text1=getContent();
 
 }
 
 // Event fired when the user stops typing
 function finished(ev) {
-	$("#status").html("Finished!");
+	inspectLineChanges();
 	
-	text2=$("#editable").html().replace(/<div>/g, "\n").replace(/<\/div>|<br>/g, "");
+	$("#editable").css("border-color", "black");
+	
+	text2=getContent();
+	
+	//alert("Before:\n"+text1+"\n\nAfter:\n"+text2);
+	
 	$("#text").text(text2);
 	$('#code').text($('#editable').html());
 	
@@ -69,26 +65,21 @@ function finished(ev) {
   var ms_start = (new Date()).getTime();
   var d = dmp.diff_main(text1, text2);
   
-  $("#status2").html("");
 	var ops = new Array();
 
   var counter=0;
   jQuery.each(d, function(i, val) {
   		if(val[0]==0) counter+=val[1].length;
   		if(val[0]==1){
-      		$("#status2").append("add(" + counter + ',' +val[1] + ")<br/>");
-
 			var op = new OP("add",[counter,val[1]]);
 			ops.push(op);
 			
       		counter+=val[1].length;
       	}
       	if(val[0]==-1){
-      		$("#status2").append("delete(" +counter + ','  + val[1] + ")<br/>");
-
 			var op = new OP("del",[counter,val[1].length]);
 			ops.push(op);
-
+			
       		counter+=val[1].length;
       	}
     
@@ -96,7 +87,8 @@ function finished(ev) {
 
   
   var ms_end = (new Date()).getTime();
-	$("#status2").append('<br/>Tempo: '+(ms_end - ms_start) / 1000 + 's');
+	//$("#status2").append('<br/>Tempo: '+(ms_end - ms_start) / 1000 + 's');
+	
 	
 	generate(ops);
 	
@@ -112,7 +104,6 @@ function finished(ev) {
 	*/
 	
 }
-
 
 
 

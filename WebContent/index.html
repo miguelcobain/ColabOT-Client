@@ -13,15 +13,38 @@
 		<link rel="stylesheet" type="text/css" href="style.css" />
     </head>
     <body>
-        <h1>Type here:</h1>
-		<div id="wrapper">
-			<div id="editable" contenteditable="true"></div>
-			<div id="status"></div>
-			<pre><div id="status2"></div></pre>
+        
+		<div id="wrapper" class="group">
+			<header>
+				<div id="title">ColabOT</div>
+				<div id="subtitle">A Web-based Collaborative Text Editor</div>
+			</header>
+			<hr>
+			<h2>Type here:</h2>
+			<div id="editable" contenteditable="true">
+				<div>
+			    	<p>&nbsp;</p>
+				</div>
+			</div>
+			<h2>Operations:</h2>
+			<div id="operations" class="group">
+				<div id="one">
+					<h3>Sent</h3>
+					<div id="sent">
+					</div>
+				</div>
+				<div id="two">
+					<h3>Received</h3>
+					<div id="received">
+					</div>
+				</div>
+			</div>
 			<h2>Resulting HTML:</h2>
 			<div id="code"></div>
 			<h2>Resulting Text:</h2>
 			<pre><div id="text"></div></pre>	
-		</div>
+		</div> <!-- END wrapper -->
+		<footer><span id="left">Mestrado em Sistemas Distribuídos</span><span id="right">MEI • Universidade do Minho</span></footer>
+
     </body>
 </html>

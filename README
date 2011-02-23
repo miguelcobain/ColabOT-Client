@@ -46,12 +46,4 @@ Example operation - add(2,asdasd) on state 11,2 :
         }
     ]
 }
-    "operation":{
-        "type":"add",
-        "arg":[
-            2,
-            "asdasd"
-        ]
-    }
-}
 ---

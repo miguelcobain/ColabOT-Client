@@ -15,8 +15,16 @@ function _connect(){
 			// Web Socket is connected. You can send data by send() method
 		};
 		this.socket.onmessage = function (evt) {
-			var received_msg = evt.data;
-			receive(received_msg);
+			var msg = jQuery.parseJSON(evt.data);
+			var ops = msg.msg[0].operation;
+			var state = msg.msg[1].state;
+			
+			jQuery.each(ops, function() {
+				var op = new OP(this._type,this._args);
+				logReceived(op);
+			});
+			
+			receive(ops,state);
 		};
 		this.socket.onclose = function() {
 			// websocket is closed.
@@ -34,6 +42,10 @@ function _close(){
 }
 
 function _sendOP(ops, myMsgs, otherMsgs){
+	jQuery.each(ops, function() {
+		logSent(this);
+	});
+	
 
 	var state= new Array()
 	state[0]=myMsgs;
@@ -55,4 +67,18 @@ function _toString(){
 function OP(type,args){
 	this._type=type;
 	this._args=args;
+	this.toString=_toString;
 }
+
+function _toString(){
+	return this._type+"("+this._args.join(',')+")";
+}
+
+function logSent(op){
+	$("#sent").append("<p>"+op.toString()+"</p>");
+}
+
+function logReceived(op){
+	$("#received").append("<p>"+op.toString()+"</p>");
+}
+
