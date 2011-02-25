@@ -9,6 +9,7 @@
 		
 		<script type="application/javascript" src="js/websocket.js"></script>
 		<script type="application/javascript" src="js/op_detector.js"></script>
+		<script type="application/javascript" src="js/op_applier.js"></script>
 		<script type="application/javascript" src="js/main.js"></script>
 		<link rel="stylesheet" type="text/css" href="style.css" />
     </head>
@@ -23,7 +24,7 @@
 			<h2>Type here:</h2>
 			<div id="editable" contenteditable="true">
 				<div>
-			    	<p>&nbsp;</p>
+			    	<p><br></p>
 				</div>
 			</div>
 			<h2>Operations:</h2>
@@ -39,12 +40,16 @@
 					</div>
 				</div>
 			</div>
+			<h2>Current State:  <span id="state"></span></h2>
 			<h2>Resulting HTML:</h2>
 			<div id="code"></div>
 			<h2>Resulting Text:</h2>
 			<pre><div id="text"></div></pre>	
 		</div> <!-- END wrapper -->
-		<footer><span id="left">Mestrado em Sistemas Distribuídos</span><span id="right">MEI • Universidade do Minho</span></footer>
+		<footer>
+			<span id="left">Mestrado em Sistemas Distribuídos</span>
+			<span id="right">MEI • Universidade do Minho</span>
+		</footer>
 
     </body>
 </html>

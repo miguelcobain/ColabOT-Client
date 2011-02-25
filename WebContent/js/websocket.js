@@ -21,10 +21,10 @@ function _connect(){
 			
 			jQuery.each(ops, function() {
 				var op = new OP(this._type,this._args);
-				logReceived(op);
+				logReceived(op,state);
+				state[1]++;
+				receive(op,state);
 			});
-			
-			receive(ops,state);
 		};
 		this.socket.onclose = function() {
 			// websocket is closed.
@@ -75,12 +75,19 @@ function _toString(){
 }
 
 function logSent(op){
-	$("#sent").append("<p>"+op.toString()+"</p>");
+	$("#sent").append("<p>"+op.toString()+" State: "+myMsgs+","+otherMsgs+"</p>");
 	$("#sent").attr({ scrollTop: $("#sent").attr("scrollHeight") });
 }
 
-function logReceived(op){
-	$("#received").append("<p>"+op.toString()+"</p>");
+function logReceived(op,state){
+	$("#received").append("<p>"+op.toString()+" State: "+state[0]+","+state[1]+"</p>");
 	$("#received").attr({ scrollTop: $("#received").attr("scrollHeight") });
+}
+
+// -----
+
+function Msg(_state,_ops){
+	this.state=_state;
+	this.ops=_ops;
 }
 
