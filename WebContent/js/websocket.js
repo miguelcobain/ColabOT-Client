@@ -21,9 +21,10 @@ function _connect(){
 			
 			jQuery.each(ops, function() {
 				var op = new OP(this._type,this._args);
-				logReceived(op,state);
-				state[1]++;
-				receive(op,state);
+				//logReceived(op,state);
+				//state[1]++;
+				//apply(op,state);
+				alert(op.toString());
 			});
 		};
 		this.socket.onclose = function() {

@@ -1,55 +1,37 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-"http://www.w3.org/TR/html4/loose.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>Collaborative Real-Time Text Editor</title>
-		<script type="application/javascript" src="lib/jquery/jquery-1.4.1.js"></script>
-		<script type="application/javascript" src="lib/diff_match_patch.js"></script>
-		
-		<script type="application/javascript" src="js/websocket.js"></script>
-		<script type="application/javascript" src="js/op_detector.js"></script>
-		<script type="application/javascript" src="js/op_applier.js"></script>
-		<script type="application/javascript" src="js/main.js"></script>
-		<link rel="stylesheet" type="text/css" href="style.css" />
-    </head>
-    <body>
-        
-		<div id="wrapper" class="group">
-			<header>
-				<div id="title">ColabOT</div>
-				<div id="subtitle">A Web-based Collaborative Text Editor</div>
-			</header>
-			<hr>
-			<h2>Type here:</h2>
-			<div id="editable" contenteditable="true">
-				<div>
-			    	<p><br></p>
-				</div>
-			</div>
-			<h2>Operations:</h2>
-			<div id="operations" class="group">
-				<div id="one">
-					<h3>Sent</h3>
-					<div id="sent">
-					</div>
-				</div>
-				<div id="two">
-					<h3>Received</h3>
-					<div id="received">
-					</div>
-				</div>
-			</div>
-			<h2>Current State:  <span id="state"></span></h2>
-			<h2>Resulting HTML:</h2>
-			<div id="code"></div>
-			<h2>Resulting Text:</h2>
-			<pre><div id="text"></div></pre>	
-		</div> <!-- END wrapper -->
-		<footer>
-			<span id="left">Mestrado em Sistemas Distribuídos</span>
-			<span id="right">MEI • Universidade do Minho</span>
-		</footer>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Editor</title>
+<link rel="stylesheet" type="text/css" href="style.css" />
+<script src="src/ace-uncompressed.js" type="text/javascript" charset="utf-8"></script>
+<script src="src/theme-twilight.js" type="text/javascript" charset="utf-8"></script>
+<script src="src/mode-javascript.js" type="text/javascript" charset="utf-8"></script>
+<script src="src/mode-c_cpp.js" type="text/javascript" charset="utf-8"></script>
+<script src="lib/jquery/jquery-1.4.1.js" type="text/javascript" charset="utf-8"></script>
 
-    </body>
+<script src="js/op_detector.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/op_applier.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/websocket.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/main.js" type="text/javascript" charset="utf-8"></script>
+
+
+</head>
+<body>
+
+<pre id="editor">int main(){
+	int i;
+	
+	for(i=0;i&lt;100;i++){
+		printf("Hello World\n");
+	}
+	
+	return 0;
+}</pre>
+    
+
+
+
+</body>
 </html>
