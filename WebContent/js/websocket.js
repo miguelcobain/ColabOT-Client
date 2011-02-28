@@ -44,7 +44,7 @@ function _close(){
 
 function _sendOP(ops, myMsgs, otherMsgs){
 	jQuery.each(ops, function() {
-		logSent(this);
+		//logSent(this);
 	});
 	
 

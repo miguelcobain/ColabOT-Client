@@ -4599,7 +4599,7 @@ var Editor =function(renderer, session) {
         return this.renderer.getShowInvisibles();
     };
 
-    this.setShowPrintMargin = function(showPrintMargin) {
+    this.setShowMargin = function(showPrintMargin) {
         this.renderer.setShowPrintMargin(showPrintMargin);
     };
 
@@ -9636,7 +9636,7 @@ var Document = function(text) {
         return end;
     };
 
-    this.remove = function(range) {
+    this.remove = function(range, silent) {
         // clip to document
         range.start = this.$clipPosition(range.start);
         range.end = this.$clipPosition(range.end);
@@ -9652,14 +9652,14 @@ var Document = function(text) {
             var lastFullRow = lastRow - 1;
 
             if (range.end.column > 0)
-                this.removeInLine(lastRow, 0, range.end.column);
+                this.removeInLine(lastRow, 0, range.end.column,silent);
 
             if (lastFullRow >= firstFullRow)
-                this.removeLines(firstFullRow, lastFullRow);
+                this.removeLines(firstFullRow, lastFullRow,silent);
 
             if (firstFullRow != firstRow) {
-                this.removeInLine(firstRow, range.start.column, this.getLine(firstRow).length);
-                this.removeNewLine(range.start.row);
+                this.removeInLine(firstRow, range.start.column, this.getLine(firstRow).length,silent);
+                this.removeNewLine(range.start.row,silent);
             }
         }
         else {
@@ -9668,7 +9668,7 @@ var Document = function(text) {
         return range.start;
     };
 
-    this.removeInLine = function(row, startColumn, endColumn) {
+    this.removeInLine = function(row, startColumn, endColumn, silent) {
         if (startColumn == endColumn)
             return;
 
@@ -9683,7 +9683,9 @@ var Document = function(text) {
             range: range,
             text: removed
         };
-        this._dispatchEvent("change", { data: delta });
+		this._dispatchEvent("change", { data: delta });
+        if(!silent)
+        	this._dispatchEvent("detect", { data: delta });
         return range.start;
     };
 
@@ -9694,7 +9696,7 @@ var Document = function(text) {
      * @param lastRow {Integer} The last row to be removed
      * @return {String[]} The removed lines
      */
-    this.removeLines = function(firstRow, lastRow) {
+    this.removeLines = function(firstRow, lastRow, silent) {
         var range = new Range(firstRow, 0, lastRow + 1, 0);
         var removed = this.$lines.splice(firstRow, lastRow - firstRow + 1);
 
@@ -9704,11 +9706,13 @@ var Document = function(text) {
             nl: this.getNewLineCharacter(),
             lines: removed
         };
-        this._dispatchEvent("change", { data: delta });
+		this._dispatchEvent("change", { data: delta });
+        if(!silent)
+        	this._dispatchEvent("detect", { data: delta });
         return removed;
     };
 
-    this.removeNewLine = function(row) {
+    this.removeNewLine = function(row, silent) {
         var firstLine = this.getLine(row);
         var secondLine = this.getLine(row+1);
 
@@ -9722,7 +9726,9 @@ var Document = function(text) {
             range: range,
             text: this.getNewLineCharacter()
         };
-        this._dispatchEvent("change", { data: delta });
+		this._dispatchEvent("change", { data: delta });
+        if(!silent)
+        	this._dispatchEvent("detect", { data: delta });
     };
 
     this.replace = function(range, text) {
