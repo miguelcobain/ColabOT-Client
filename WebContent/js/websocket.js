@@ -23,8 +23,8 @@ function _connect(){
 				var op = new OP(this._type,this._args);
 				//logReceived(op,state);
 				//state[1]++;
-				//apply(op,state);
-				alert(op.toString());
+				apply(op,state);
+				//alert(op.toString());
 			});
 		};
 		this.socket.onclose = function() {
