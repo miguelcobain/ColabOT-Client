@@ -12,16 +12,16 @@ function apply(op,state){
 			var erow=srow;
 			var ecolumn=scolumn;
 			
-			for(ecolumn=scolumn;delLen==0;delLen--){
-				if(erow==len) {
-					erow=0;
-					ecolumn++;
+			for(ecolumn=scolumn;delLen!=0;delLen--){
+				if(ecolumn==len) {
+					ecolumn=0;
+					erow++;
 					len=doc.lines[srow].lenght;
 				}
-				else erow++;
+				else ecolumn++;
 			}
 			
-			doc.remove({start:{column:scolumn,row:srow},end:{column:ecolumn,row:erow}});
+			doc.remove(doc.makeRange(srow,scolumn,erow,ecolumn),true);
 			break;
 		}
 	}

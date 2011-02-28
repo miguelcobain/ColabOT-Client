@@ -9663,7 +9663,7 @@ var Document = function(text) {
             }
         }
         else {
-            this.removeInLine(firstRow, range.start.column, range.end.column);
+            this.removeInLine(firstRow, range.start.column, range.end.column,silent);
         }
         return range.start;
     };
