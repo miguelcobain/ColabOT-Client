@@ -5,12 +5,12 @@ function detector(ev)  {
 		typeWatch(ev);
 		switch(ev.data.action){
 			case "insertText":{
-				var op = new OP('add',[ev.data.range.start.column,ev.data.range.start.row,ev.data.text]);
+				var op = new OP('add',[ev.data.range.start.row,ev.data.range.start.column,ev.data.text]);
 				socket.sendOP([op],0,0);
 				break;
 			}
 			case "removeText":
-				var op = new OP('del',[ev.data.range.start.column,ev.data.range.start.row,ev.data.text.length]);
+				var op = new OP('del',[ev.data.range.start.row,ev.data.range.start.column,ev.data.text.length]);
 				socket.sendOP([op],0,0);
 				break;
 		}

@@ -4599,7 +4599,7 @@ var Editor =function(renderer, session) {
         return this.renderer.getShowInvisibles();
     };
 
-    this.setShowPrintMargin = function(showPrintMargin) {
+    this.setShowMargin = function(showPrintMargin) {
         this.renderer.setShowPrintMargin(showPrintMargin);
     };
 

@@ -1,13 +1,12 @@
 function apply(op,state){
 	switch(op._type){
 		case "add":{
-			
-			doc.insert({row: op._args[1], column:op._args[0]},op._args[2],true);
+			doc.insert({row: op._args[0], column:op._args[1]},op._args[2],true);
 			break;
 		}
 		case "del":{
-			var srow = op._args[1];
-			var scolumn = op._args[0];
+			var srow = op._args[0];
+			var scolumn = op._args[1];
 			var len = doc.$lines[srow].length;
 			var delLen=op._args[2];
 			var erow=srow;
