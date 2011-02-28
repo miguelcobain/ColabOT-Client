@@ -49,17 +49,23 @@ body {
 	width:98%;
 	cursor: pointer;
 	text-align:left;
+	overflow:hidden;
 }
+
+#tab:hover{
+	opacity:1.0;
+}
+
 
 #icon{
 	height:48px;
-	width:100%;
+	width:80%;
 	background-image:url('img/User-Files-icon.png');
 	background-repeat:no-repeat;
 	background-position:left center;
 	z-index:9999;
 	display:block;
-	padding-left:52px;
+	padding-left:56px;
 }
 
 #desc{
