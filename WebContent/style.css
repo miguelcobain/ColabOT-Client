@@ -20,22 +20,27 @@ body {
 	left:0;
 	width:100%;
 	height:500px;
-	z-index:-99;
+	z-index:9;
+	pointer-events: none;
 }
 
 #slidebottom {
+	pointer-events: auto;
 	position: absolute;
 	bottom:-200px;
 	top:440px;
 	left:0;
 	width:100%;
+	height:324px;
 	z-index:99;
 	text-align:center;
 	
 	font-size:14px;
 	line-height: 25px;  
     color: #CCCCCC; 
-	font-weight: bold;
+	font-weight: normal;
+	font-family:'Trebuchet MS',Arial, Helvetica;
+	overflow:hidden;
 }
 
 #tab{
@@ -46,9 +51,28 @@ body {
 	text-align:left;
 }
 
+#icon{
+	height:48px;
+	width:100%;
+	background-image:url('img/User-Files-icon.png');
+	background-repeat:no-repeat;
+	background-position:left center;
+	z-index:9999;
+	display:block;
+	padding-left:52px;
+}
+
+#desc{
+	font-size:11px;
+	color: #CCCCCC; 
+	font-style:italic;
+	display:block;
+	margin-top:4px;
+}
+
 #chat{
 	position: relative;
-	height:100%;
+	height:264px;
 	width:90%;
 	margin:0 auto;
 	padding: 0px 30px 0px 30px;
@@ -57,33 +81,63 @@ body {
 	background-color:#333333;
 	border-left:solid 2px #555555;
 	border-right:solid 2px #555555;
+	border-bottom:solid 2px #555555;
+	overflow:hidden;
 }
 
 #messages{
-	height:100%;
-	width:80%;
-	background-color:yellow;
+	height:264px;
+	width:78%;
 	float:left;
+	font-size:12px;
+	position:relative;
 }
 
 #users{
-	height:100%;
-	width:20%;
-	background-color:red;
+	height:190px;
+	width:17%;
 	float:left;
+	margin:20px 20px 20px 0px;
+	padding:15px;
+	border:2px solid #999999;
+	background-color:#EEEEEE;
+	color:#222222;
+}
+
+#users p{
+	margin:0;
+	background: url('img/edit-user-icon.png');
+	background-repeat:no-repeat;
+	background-position:left center;
+	padding-left:22px;
+	
 }
 
 #history{
-	height:80%;
-	width:100%;
-	background-color:cyan;
+	margin:20px 20px 10px 0px;
+	padding:5px 15px 15px 15px;
+	height:133px;
+	width:97%;
+	border:2px solid #999999;
+	background-color:#EEEEEE;
+	color:#222222;
+}
+
+#history p{
+	margin:0;
+}
+#history user{
+	margin:0;
+	padding-left:22px;
 }
 
 #input{
-	height:20%;
+	height:50px;
 	width:100%;
-	background-color:purple;
-	border:1px solid black;
+	border:2px solid #999999;
+	background-color:#EEEEEE;
+	color:#222222;
+	font-size:14px;
 }
 
 /* --- */
@@ -107,13 +161,13 @@ body {
 
 }
 
-.button, .button span
+.button, .button #texture
 {
     -moz-border-radius: 4px;
     border-radius: 4px;
 }
 
-.button span
+.button #texture
 {
     border-top: 1px solid #fff; /* Fallback style */
     border-top: 1px solid rgba(255, 255, 255, 0.5);

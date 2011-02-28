@@ -28,7 +28,7 @@ window.onload = function() {
 	socket = new WebS("ws://localhost:18608");
 	socket.connect();
 	
-	$('#slidebottom').draggable({
+	/*$('#slidebottom').draggable({
 		axis: 'y',
 		handle: '#tab',
 		scroll:false,
@@ -47,7 +47,7 @@ window.onload = function() {
 		drag: function(event, ui) {
 			//console.log("fired");
 		}
-	});
+	});*/
 
     $("#tab").click(function(){
 	
@@ -58,16 +58,16 @@ window.onload = function() {
 	        // actual click event code
 			var value,value2;
 			if(visible) {value=440;value2=0}
-			else {value=225;value2=220}
+			else {value=175;value2=264}
 			visible=!visible;
-			$( "#slidebottom" ).draggable( "option", "disabled", !visible );
+			//$( "#slidebottom" ).draggable( "option", "disabled", !visible );
 		
 			$("#slidebottom").animate({
 				top:value,
 			}, 1500 );
-			$("#chat").animate({
+			/*$("#chat").animate({
 				height:value2,
-			}, 1500 );
+			}, 1500 );*/
 		}
     });
 	//setTimeout("timedCount()",1000);
