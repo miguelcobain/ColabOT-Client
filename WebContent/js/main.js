@@ -27,6 +27,7 @@ window.onload = function() {
 
 	socket = new WebS("ws://localhost:18608");
 	socket.connect();
+
 	
 	/*$('#slidebottom').draggable({
 		axis: 'y',
@@ -48,33 +49,21 @@ window.onload = function() {
 			//console.log("fired");
 		}
 	});*/
-
-    $("#tab").click(function(){
+	toggle();
 	
-	    if ($(this).hasClass('noclick')) {
-	        $(this).removeClass('noclick');
-	    }
-	    else {
-	        // actual click event code
-			var value,value2;
-			if(visible) {value=440;value2=0}
-			else {value=175;value2=264}
-			visible=!visible;
-			//$( "#slidebottom" ).draggable( "option", "disabled", !visible );
-		
-			$("#slidebottom").animate({
-				top:value,
-			}, 1500 );
-			/*$("#chat").animate({
-				height:value2,
-			}, 1500 );*/
+    $("#tab").click(toggle);
+	$("#input").keypress(function(ev){
+		if(ev.keyCode==13 && !ev.ctrlKey){
+			ev.preventDefault();
+			socket.sendAdmin(new Admin('newMsg',['Guest',$('#input').val()]));
+			$('#input').val("");
 		}
-    });
+	});
 	//setTimeout("timedCount()",1000);
 	
 };
 
-var visible=false;
+
 
 
 function timedCount(){

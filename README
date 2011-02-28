@@ -26,10 +26,9 @@ Operations:
 			lineid - the id of the line to delete
 			
 Administration Messages (not finished):
-	- newUser/2
+	- newUser/1
 		Arguments:
 			username - username of the new user
-			color - the rgb code associated with the respective user
 	- newMsg/2
 		Arguments:
 			username - username of the creator of the message
@@ -75,3 +74,13 @@ Example operation - add(2,asdasd) on state 11,2 :
     ]
 }
 ---
+{
+"admin": [
+               {
+                   "_type": "newMsg",
+                   "_args": [
+           user1,
+                       "asdf"
+                   ]
+               }
+}

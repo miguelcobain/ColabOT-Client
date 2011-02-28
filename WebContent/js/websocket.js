@@ -4,6 +4,7 @@ function WebS(_url){
 	this.connect=_connect;
 	this.sendOP=_sendOP;
 	this.close=_close;
+	this.sendAdmin=_sendAdmin;
 	//this.toString=_toString;
 }
 
@@ -13,19 +14,32 @@ function _connect(){
 	    this.socket = new WebSocket(this.url);
 		this.socket.onopen = function(){
 			// Web Socket is connected. You can send data by send() method
+			var adm = new Admin('newUser',['Guest']);
+			//alert(socket.url);
+			socket.sendAdmin(adm);
 		};
 		this.socket.onmessage = function (evt) {
 			var msg = jQuery.parseJSON(evt.data);
-			var ops = msg.msg[0].operation;
-			var state = msg.msg[1].state;
 			
-			jQuery.each(ops, function() {
-				var op = new OP(this._type,this._args);
-				//logReceived(op,state);
-				//state[1]++;
-				apply(op,state);
-				//alert(op.toString());
-			});
+			if(msg.hasOwnProperty('admin')){
+				var type = msg.admin._type;
+				var args = msg.admin._args;
+				
+				var msg = new Admin(type,args);
+				newMsg(msg);
+			}
+			else {
+				var ops = msg.msg[0].operation;
+				var state = msg.msg[1].state;
+			
+				jQuery.each(ops, function() {
+					var op = new OP(this._type,this._args);
+					//logReceived(op,state);
+					//state[1]++;
+					apply(op,state);
+					//alert(op.toString());
+				});
+			}
 		};
 		this.socket.onclose = function() {
 			// websocket is closed.
@@ -57,6 +71,11 @@ function _sendOP(ops, myMsgs, otherMsgs){
 	this.socket.send(JSON.stringify({msg: [{"operation": ops}, {"state": state}]}));
 }
 
+function _sendAdmin(adm){
+	//alert(JSON.stringify({"admin": { "_type": adm._type, "_args": adm._args}}));
+	this.socket.send(JSON.stringify({"admin": { "_type": adm._type, "_args": adm._args}}));
+}
+
 function _toString(){
 	return "";
 }
@@ -75,6 +94,22 @@ function _toString(){
 	return this._type+"("+this._args.join(',')+")";
 }
 
+// -----
+
+function Msg(_state,_ops){
+	this.state=_state;
+	this.ops=_ops;
+}
+
+// -----
+
+function Admin(type,args){
+	this._type=type;
+	this._args=args;
+	this.toString=_toString;
+}
+// -----
+
 function logSent(op){
 	$("#sent").append("<p>"+op.toString()+" State: "+myMsgs+","+otherMsgs+"</p>");
 	$("#sent").attr({ scrollTop: $("#sent").attr("scrollHeight") });
@@ -84,11 +119,3 @@ function logReceived(op,state){
 	$("#received").append("<p>"+op.toString()+" State: "+state[0]+","+state[1]+"</p>");
 	$("#received").attr({ scrollTop: $("#received").attr("scrollHeight") });
 }
-
-// -----
-
-function Msg(_state,_ops){
-	this.state=_state;
-	this.ops=_ops;
-}
-
