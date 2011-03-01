@@ -27,13 +27,12 @@ body {
 #slidebottom {
 	pointer-events: auto;
 	position: absolute;
-	bottom:-200px;
-	top:440px;
 	left:0;
 	width:100%;
-	height:324px;
-	z-index:99;
+	height:62px;
+	z-index:2;
 	text-align:center;
+	bottom:0;
 	
 	font-size:14px;
 	line-height: 25px;  
@@ -45,15 +44,11 @@ body {
 
 #tab{
 	position: relative;
-	height:60px;
+	height:58px;
 	width:98%;
 	cursor: pointer;
 	text-align:left;
 	overflow:hidden;
-}
-
-#tab:hover{
-	opacity:1.0;
 }
 
 
@@ -78,10 +73,9 @@ body {
 
 #chat{
 	position: relative;
-	height:264px;
-	width:90%;
+	height:300px;
+	width:95%;
 	margin:0 auto;
-	padding: 0px 30px 0px 30px;
 	text-align:left;
 	
 	background-color:#333333;
@@ -92,19 +86,20 @@ body {
 }
 
 #messages{
-	height:264px;
-	width:78%;
+	height:300px;
+	width:76%;
 	float:left;
 	font-size:12px;
-	position:relative;
+	margin-right:2%;
 }
 
 #users{
-	height:190px;
-	width:17%;
+	height:228px;
+	width:15%;
 	float:left;
-	margin:20px 20px 20px 0px;
-	padding:15px;
+	margin:20px 1% 20px 2%;
+	padding:1.5%;
+	
 	border:2px solid #999999;
 	background-color:#EEEEEE;
 	color:#222222;
@@ -121,9 +116,9 @@ body {
 }
 
 #history{
-	margin:20px 20px 10px 0px;
-	padding:5px 15px 15px 15px;
-	height:133px;
+	margin:20px 0px 10px 0px;
+	padding:1% 1% 1% 1%;
+	height:168px;
 	width:97%;
 	border:2px solid #999999;
 	background-color:#EEEEEE;
@@ -141,11 +136,14 @@ body {
 
 #input{
 	height:50px;
-	width:100%;
+	width:97%;
+	padding:1% 1% 1% 1%;
+	
 	border:2px solid #999999;
 	background-color:#EEEEEE;
 	color:#222222;
 	font-size:14px;
+	resize: none;
 }
 
 /* --- */
@@ -205,6 +203,7 @@ body {
     box-shadow: 0 0 .1em rgba(0,0,0,0.4);
     -moz-box-shadow: 0 0 .1em rgba(0,0,0,0.4);
     -webkit-box-shadow: 0 0 .1em rgba(0,0,0,0.4);
+	opacity:1.0;
 }
 
 .button:active

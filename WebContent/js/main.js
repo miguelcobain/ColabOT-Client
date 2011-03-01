@@ -1,6 +1,7 @@
 var editor;
 var doc;
 var socket;
+var user="Guest";
 
 var myMsgs;
 var otherMsgs;
@@ -55,8 +56,10 @@ window.onload = function() {
 	$("#input").keypress(function(ev){
 		if(ev.keyCode==13 && !ev.ctrlKey){
 			ev.preventDefault();
-			socket.sendAdmin(new Admin('newMsg',['Guest',$('#input').val()]));
-			$('#input').val("");
+			var msg = $('#input').val();
+			socket.sendAdmin(new Admin('newMsg',[user,msg]));
+			insertMessage(user,msg);
+			$('#input').val("");	
 		}
 	});
 	//setTimeout("timedCount()",1000);
