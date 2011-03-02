@@ -4,7 +4,9 @@ function newMsg(msg){
 			insertMessage(msg._args[0],msg._args[1]);
 			break;
 		case "newUser":
-			$('#users').append('<p>'+msg._args[0]+'</p>');
+			jQuery.each(msg._args, function() {
+				$('#users').append('<p>'+this+'</p>');
+			});
 			break;
 	}
 }
