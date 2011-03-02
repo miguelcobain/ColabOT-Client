@@ -8,10 +8,12 @@ var otherMsgs;
 var notAcknowleged;
 
 window.onload = function() {
+	showWait();
 	//Initialize editor
     editor = ace.edit("editor");
     editor.setTheme("ace/theme/twilight");
 	editor.setShowMargin(false);
+	editor.setReadOnly(true);
 
 	var C_CppMode = require("ace/mode/c_cpp").Mode;
     editor.getSession().setMode(new C_CppMode());

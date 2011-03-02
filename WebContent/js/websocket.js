@@ -17,6 +17,8 @@ function _connect(){
 			var adm = new Admin('newUser',['Guest']);
 			//alert(socket.url);
 			socket.sendAdmin(adm);
+			editor.setReadOnly(false);
+			showWait();
 		};
 		this.socket.onmessage = function (evt) {
 			var msg = jQuery.parseJSON(evt.data);
@@ -27,6 +29,7 @@ function _connect(){
 				
 				var msg = new Admin(type,args);
 				newMsg(msg);
+				
 			}
 			else {
 				var ops = msg.msg[0].operation;
