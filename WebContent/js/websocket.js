@@ -18,7 +18,7 @@ function _connect(){
 			//alert(socket.url);
 			socket.sendAdmin(adm);
 			editor.setReadOnly(false);
-			showWait();
+			showWait(); 
 		};
 		this.socket.onmessage = function (evt) {
 			var msg = jQuery.parseJSON(evt.data);
